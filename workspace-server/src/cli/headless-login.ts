@@ -167,6 +167,17 @@ function generateOAuthUrl(): string {
 async function main() {
   const force = process.argv.includes('--force');
 
+  if (config.clientSecret) {
+    // Direct mode: run the loopback flow against Google, no cloud function.
+    if (force) {
+      await OAuthCredentialStorage.clearCredentials();
+    }
+    const { AuthManager } = await import('../auth/AuthManager');
+    await new AuthManager(SCOPES).getAuthenticatedClient();
+    console.log('Authenticated. Credentials saved.');
+    return;
+  }
+
   // Check for existing credentials unless --force is used
   if (!force) {
     const existing = await OAuthCredentialStorage.loadCredentials();

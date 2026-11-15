@@ -8,6 +8,8 @@ import { logToFile } from './logger';
 
 export interface WorkspaceConfig {
   clientId: string;
+  /** Set for direct mode: tokens are exchanged with Google locally, no cloud function. */
+  clientSecret?: string;
   cloudFunctionUrl: string;
 }
 
@@ -24,6 +26,7 @@ const DEFAULT_CONFIG: WorkspaceConfig = {
 export function loadConfig(): WorkspaceConfig {
   const config: WorkspaceConfig = {
     clientId: process.env['WORKSPACE_CLIENT_ID'] || DEFAULT_CONFIG.clientId,
+    clientSecret: process.env['WORKSPACE_CLIENT_SECRET'] || undefined,
     cloudFunctionUrl:
       process.env['WORKSPACE_CLOUD_FUNCTION_URL'] ||
       DEFAULT_CONFIG.cloudFunctionUrl,
