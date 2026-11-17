@@ -1,10 +1,10 @@
 {
-  "name": "gemini-workspace-extension",
+  "name": "google-workspace-mcp",
   "version": "0.0.8",
-  "description": "Google Workspace Server Extension",
+  "description": "Google Workspace MCP server (from gemini-cli-extensions/workspace) with direct OAuth mode",
   "private": true,
   "bin": {
-    "gemini-workspace-server": "workspace-server/dist/index.js"
+    "google-workspace-mcp": "workspace-server/dist/index.js"
   },
   "workspaces": [
     "workspace-server"
@@ -17,19 +17,10 @@
     "test:coverage": "npm run test:coverage --workspaces --if-present",
     "test:ci": "npm run test:ci --workspaces --if-present",
     "start": "npm run start --workspaces --if-present",
-    "auth-utils": "npm run build:auth-utils -w workspace-server && node scripts/auth-utils.js",
-    "clean": "node scripts/clean.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format:check": "prettier --check .",
-    "format:fix": "prettier --write .",
-    "release": "node scripts/release.js",
-    "release:dev": "npm install && npm run build && node scripts/release.js",
-    "set-version": "node scripts/set-version.js",
-    "version": "node scripts/set-version.js && git add workspace-server/package.json",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "format:fix": "prettier --write ."
   },
   "dependencies": {
     "@google-apps/chat": "^0.24.0",
